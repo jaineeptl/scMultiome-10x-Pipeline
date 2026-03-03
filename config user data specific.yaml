@@ -1,0 +1,47 @@
+project:
+  seed: 1
+  out_dir: "output"
+  input_dir: "input"
+
+tenx:
+  cellranger_dir: "input/cellranger_output"
+  filtered_h5: "input/cellranger_output/filtered_feature_bc_matrix.h5"
+  fragments: "input/cellranger_output/atac_fragments.tsv.gz"
+  per_barcode_metrics: "input/cellranger_output/per_barcode_metrics.csv"
+
+species:
+  genome: "hg38"          # hg38 or mm10
+  ensdb: "EnsDb.Hsapiens.v86"  # or EnsDb.Mmusculus.v79
+  mito_pattern: "^MT-"    # mouse often "^mt-"
+  ribo_pattern: "^RP[SL]" # mouse may differ depending on annotation
+
+soupx:
+  enabled: true
+
+multiseq:
+  enabled: true
+  lmo_csv: "input/LMOlist.csv"
+  r1_fastq: "input/SV_BC_RawData/barcodes_R1.fastq.gz"
+  r2_fastq: "input/SV_BC_RawData/barcodes_R2.fastq.gz"
+  cell_barcode_n: 16
+  umi_range: [17, 28]
+  tag_range: [1, 8]
+  cell_range: [1, 16]
+
+qc:
+  rna:
+    mad_k: 3
+    mito_cap: 50
+  atac:
+    mad_k: 3
+  save_plots: true
+
+analysis:
+  dims_rna: [1, 20]
+  dims_lsi: [2, 30]
+  resolution_rna: 1.2
+  resolution_wnn: 0.5
+
+macs2:
+  enabled: true
+  path: "macs2"   # let user rely on PATH; or set full path
